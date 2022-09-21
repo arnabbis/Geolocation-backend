@@ -12,7 +12,7 @@ export interface location_location {
 
     geom?:any;
 
-    polygon?:any;
+
 
 
 }

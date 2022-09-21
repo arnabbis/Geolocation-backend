@@ -18,6 +18,7 @@ import { diskStorage } from 'multer';
 import { readFileSync } from 'fs';
 import { Parcel } from './entities/polygon.entity';
 import { parse } from 'papaparse'
+import { lineString } from './entities/line.entity';
 
 @Controller('gisdata')
 export class LocationController {
@@ -85,6 +86,14 @@ export class LocationController {
          createParcelPointDto:Parcel
      ): Promise<Parcel> {
          return this.locationService.createParcelPoint(createParcelPointDto)
+     }
+
+     @Post('/createline')
+     async createlinePoint(
+         @Body()
+         createlinePointDto:lineString
+     ): Promise<lineString> {
+         return this.locationService.createLinePoint(createlinePointDto)
      }
   }
 

@@ -9,11 +9,13 @@ import { Location } from './entities/location.entity';
 import { Parcel } from './entities/polygon.entity';
 import { location_location } from './location.interface';
 import { Polygon } from 'geojson';
+import { lineString } from './entities/line.entity';
+import {LineString} from 'geojson';
 
 @Injectable()
 export class LocationService {
 
-  constructor(@InjectRepository(Location) private readonly Location: Repository<Location>, @InjectRepository(Parcel) private readonly Parcel: Repository<Parcel>){}
+  constructor(@InjectRepository(Location) private readonly Location: Repository<Location>, @InjectRepository(Parcel) private readonly Parcel: Repository<Parcel>,@InjectRepository(lineString) private readonly lineString: Repository<lineString>){}
 
 
 
@@ -51,5 +53,33 @@ export class LocationService {
     await this.Parcel.save(parcel)
     return parcel
 }
+
+async createLinePoint(createLinePointDto:lineString): Promise<lineString> {
+  const { position} = createLinePointDto
+
+  // const data = {
+  //   City_Name:createParcelPointDto.City_Name,
+  // }
+  //console.log(data)
+  const lineString: LineString = {
+      type: 'LineString',
+      coordinates: [position],
+  }
+
+  //  const Data = {
+    
+  //   City_Name:createLinePointDto.City_Name
+  //  }
+  //  console.log(Data)
+
+  const line = this.lineString.create({
+      lineString,
+      City_Name:createLinePointDto.City_Name
+  })
+
+  await this.lineString.save(line)
+  return line
+}
+
 }
   

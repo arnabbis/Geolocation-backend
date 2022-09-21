@@ -29,13 +29,5 @@ export class Location {
   })
   geom: Point;
 
-  @Index({spatial:true})
-  @Column({
-    type: 'geography',
-    spatialFeatureType: 'Polygon',
-    srid:4326,
-    nullable: true
-})
-polygon:Polygon
 
 }
