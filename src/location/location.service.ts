@@ -27,15 +27,25 @@ export class LocationService {
   }
 
   async createParcelPoint(createParcelPointDto:Parcel): Promise<Parcel> {
-    const { position } = createParcelPointDto
+    const { position} = createParcelPointDto
 
+    // const data = {
+    //   City_Name:createParcelPointDto.City_Name,
+    // }
+    //console.log(data)
     const polygon: Polygon = {
         type: 'Polygon',
         coordinates: [position],
     }
 
+     const Data = {
+      Polygon:polygon,
+      City_Name:createParcelPointDto.City_Name
+     }
+     console.log(Data)
     const parcel = this.Parcel.create({
         polygon,
+        City_Name:createParcelPointDto.City_Name
     })
 
     await this.Parcel.save(parcel)

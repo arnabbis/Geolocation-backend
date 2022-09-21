@@ -16,8 +16,8 @@ import { location_location } from './location.interface';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { readFileSync } from 'fs';
-import { parse } from 'papaparse';
 import { Parcel } from './entities/polygon.entity';
+import { parse } from 'papaparse'
 
 @Controller('gisdata')
 export class LocationController {
@@ -67,11 +67,11 @@ export class LocationController {
 
     for (let a of parsedCsv.data) {
       console.log(a);
-      var point = { type: 'Point', coordinates: [a['lat'],a['lon']] };
+      var point = { type: 'Point', coordinates: [a.lat,a.lon] };
       var newData = {
-        lat: a['lat'],
-        lon: a['lon'],
-        City_Name: a['city_name'],
+        lat: a.lat,
+        lon: a.lon,
+        City_Name: a.city_name,
         geom: point,
       };
       console.log(newData);
